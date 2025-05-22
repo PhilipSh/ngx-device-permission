@@ -3,5 +3,6 @@
   "dest": "../../dist/packages/ngx-device-permission",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "assets": ["./README.md", "./LICENSE"]
 }

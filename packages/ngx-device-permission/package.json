@@ -1,7 +1,25 @@
 {
   "name": "ngx-device-permission",
   "version": "0.0.1",
+  "description": "Angular library for handling device permissions",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilipSh/ngx-device-permission.git"
+  },
+  "keywords": [
+    "angular",
+    "permissions",
+    "device",
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "author": "Philip Shpen",
+  "bugs": {
+    "url": "https://github.com/PhilipSh/ngx-device-permission/issues"
+  },
+  "homepage": "https://github.com/PhilipSh/ngx-device-permission#readme",
   "peerDependencies": {
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0"
