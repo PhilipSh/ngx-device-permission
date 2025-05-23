@@ -1,6 +1,6 @@
 {
   "name": "ngx-device-permission",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Angular library for handling device permissions",
   "license": "MIT",
   "repository": {
