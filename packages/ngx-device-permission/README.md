@@ -1,163 +1,86 @@
 # ngx-device-permission
 
-Angular library for convenient handling of device permissions (camera, microphone, geolocation, etc.).
+Angular library for managing browser permissions and accessing media devices (like microphone and camera) in a reactive and composable way using the [Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API) and [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices).
 
-## Installation
+## 📦 Installation
 
 ```bash
 npm install ngx-device-permission
 ```
 
-## Usage
+## 🚀 Features
 
-### Using the Service
+- ✅ Check browser permission status (camera, microphone, geolocation, etc.)
+- ✅ Observe permission changes via RxJS
+- ✅ Request access to camera and microphone
+- ✅ List connected media input/output devices
+- 🔧 SSR-safe
+- 📦 Tree-shakable and modular
+
+## 📚 Usage
+
+### 1. DevicePermissionService
+
+Wrapper around the native navigator.permissions API.
 
 ```typescript
 import { Component, inject } from '@angular/core';
 import { DevicePermissionService } from 'ngx-device-permission';
-import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-camera',
+  selector: 'app-permissions',
+  standalone: true,
   template: `
-    <button (click)="requestCameraPermission()">Enable Camera</button>
-    <video #videoElement *ngIf="hasCameraPermission"></video>
+    <div>
+      <h3>Camera Permission</h3>
+      <p>Status: {{ cameraStatus$ | async }}</p>
+    </div>
+
+    <div>
+      <h3>Microphone Permission</h3>
+      <p>Status: {{ microphoneStatus$ | async }}</p>
+    </div>
+
+    <div>
+      <h3>Media Access</h3>
+      <button (click)="requestMediaAccess()">
+        Request Camera & Microphone
+      </button>
+    </div>
   `,
 })
-export class CameraComponent {
-  private devicePermission = inject(DevicePermissionService);
-  hasCameraPermission = false;
+export class PermissionsComponent {
+  private permissionService = inject(DevicePermissionService);
+  private mediaService = inject(MediaDeviceService);
 
-  requestCameraPermission() {
-    this.devicePermission
-      .requestAccess({ video: true })
-      .pipe(
-        tap(() => {
-          this.hasCameraPermission = true;
-          // Initialize camera
-        })
-      )
-      .subscribe({
-        error: (error) => console.error('Error requesting permission:', error),
+  cameraStatus$ = this.permissionService.observePermissionChange('camera');
+  microphoneStatus$ =
+    this.permissionService.observePermissionChange('microphone');
+  devices$ = this.mediaService.enumerateDevices();
+  stream: MediaStream | null = null;
+
+  requestMediaAccess() {
+    this.mediaService
+      .requestAccess({ video: true, audio: true })
+      .subscribe((stream) => {
+        this.stream = stream;
       });
   }
 }
 ```
 
-## Supported Permissions
+## 🗺 Roadmap
 
-The library supports all standard browser permissions through the Permissions API:
+| Feature                                                  | Status     |
+| -------------------------------------------------------- | ---------- |
+| Permission status query (Permissions API)                | ✅ Done    |
+| Reactive permission change observer                      | ✅ Done    |
+| Media stream request (camera, mic)                       | ✅ Done    |
+| Device enumeration (microphones, cameras)                | ✅ Done    |
+| Clipboard permission + interaction (navigator.clipboard) | ⏳ Planned |
+| Geolocation permission and observer                      | ⏳ Planned |
+| Notification permission API                              | ⏳ Planned |
 
-- `camera` - access to camera
-- `microphone` - access to microphone
-- `geolocation` - access to geolocation
-- `notifications` - access to notifications
-- `clipboard` - access to clipboard
-- `midi` - access to MIDI devices
-- `payment-handler` - access to payment handlers
-- `persistent-storage` - access to persistent storage
-- `push` - access to push notifications
+## 🤝 Contributing
 
-## API
-
-### DevicePermissionService
-
-#### Methods
-
-- `getPermissionStatus(name: PermissionName): Observable<PermissionState>`
-
-  - Gets the current status of a permission
-  - Returns an Observable that emits the current permission state
-  - Automatically handles SSR environment
-
-- `observePermissionChange(name: PermissionName): Observable<PermissionState>`
-
-  - Observes changes in permission status
-  - Returns an Observable that emits whenever the permission state changes
-  - Automatically handles SSR environment
-
-- `requestAccess(constraints: MediaStreamConstraints): Observable<MediaStream>`
-  - Requests access to media devices (camera, microphone)
-  - Returns an Observable that emits the MediaStream when access is granted
-  - Automatically handles SSR environment
-
-#### Types
-
-```typescript
-type PermissionState = 'granted' | 'denied' | 'prompt';
-```
-
-## Usage Examples
-
-### Observing Permission Changes
-
-```typescript
-import { Component, inject, OnInit } from '@angular/core';
-import { DevicePermissionService } from 'ngx-device-permission';
-
-@Component({
-  selector: 'app-permissions',
-  template: `
-    <div>Camera permission: {{ cameraPermission$ | async }}</div>
-    <div>Microphone permission: {{ microphonePermission$ | async }}</div>
-  `,
-})
-export class PermissionsComponent implements OnInit {
-  private devicePermission = inject(DevicePermissionService);
-
-  cameraPermission$ = this.devicePermission.observePermissionChange('camera');
-  microphonePermission$ =
-    this.devicePermission.observePermissionChange('microphone');
-}
-```
-
-### Requesting Multiple Permissions
-
-```typescript
-import { Component, inject } from '@angular/core';
-import { DevicePermissionService } from 'ngx-device-permission';
-import { forkJoin } from 'rxjs';
-
-@Component({
-  selector: 'app-multi-permissions',
-  template: `
-    <button (click)="requestPermissions()">Request Permissions</button>
-  `,
-})
-export class MultiPermissionsComponent {
-  private devicePermission = inject(DevicePermissionService);
-
-  requestPermissions() {
-    forkJoin({
-      camera: this.devicePermission.requestAccess({ video: true }),
-      microphone: this.devicePermission.requestAccess({ audio: true }),
-    }).subscribe({
-      next: (streams) => {
-        // Handle successful access to both devices
-        console.log('Access granted to all devices');
-      },
-      error: (error) => {
-        console.error('Error requesting permissions:', error);
-      },
-    });
-  }
-}
-```
-
-## Requirements
-
-- Angular >= 19.2.0
-- Modern browser support
-- RxJS (included with Angular)
-
-## License
-
-MIT
-
-## Author
-
-Philip Shpen
-
-## Support
-
-If you encounter any issues or have suggestions for improvements, please create an issue in the [GitHub repository](https://github.com/PhilipSh/ngx-device-permission/issues).
+PRs are welcome! Feel free to open issues or request new features.
