@@ -1,3 +1,13 @@
+## 0.2.2 (2025-05-25)
+
+### 🩹 Fixes
+
+- package deps ([9c98d1b](https://github.com/PhilipSh/ngx-device-permission/commit/9c98d1b))
+
+### ❤️ Thank You
+
+- Philip Shpen @PhilipSh
+
 ## 0.2.1 (2025-05-25)
 
 This was a version bump only, there were no code changes.
