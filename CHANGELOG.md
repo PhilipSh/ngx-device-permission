@@ -1,0 +1,14 @@
+## 0.2.0 (2025-05-25)
+
+### 🚀 Features
+
+- add geolocation service ([2f55bd1](https://github.com/PhilipSh/ngx-device-permission/commit/2f55bd1))
+
+### 🩹 Fixes
+
+- version ([38d291a](https://github.com/PhilipSh/ngx-device-permission/commit/38d291a))
+- add only publish in ci ([e779909](https://github.com/PhilipSh/ngx-device-permission/commit/e779909))
+
+### ❤️ Thank You
+
+- Philip Shpen @PhilipSh
