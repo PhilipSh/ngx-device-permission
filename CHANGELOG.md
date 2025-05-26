@@ -1,3 +1,20 @@
+## 0.3.0 (2025-05-26)
+
+### 🚀 Features
+
+- cliboard service ([5229501](https://github.com/PhilipSh/ngx-device-permission/commit/5229501))
+
+### 🩹 Fixes
+
+- publish ci ([c40f22b](https://github.com/PhilipSh/ngx-device-permission/commit/c40f22b))
+- workflow trigger ([2bf93ed](https://github.com/PhilipSh/ngx-device-permission/commit/2bf93ed))
+- split workflows ([1fe1e53](https://github.com/PhilipSh/ngx-device-permission/commit/1fe1e53))
+- workflows permissions ([751f4bf](https://github.com/PhilipSh/ngx-device-permission/commit/751f4bf))
+
+### ❤️ Thank You
+
+- Philip Shpen @PhilipSh
+
 ## 0.2.3 (2025-05-25)
 
 This was a version bump only, there were no code changes.
