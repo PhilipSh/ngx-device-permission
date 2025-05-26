@@ -33,8 +33,17 @@
   "release": {
     "projects": ["packages/*"],
     "version": {
-      "preVersionCommand": "npx nx run-many -t build",
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "manifestRootsToUpdate": ["packages/{projectName}"],
+      "versionActionsOptions": {
+        "skipLockFileUpdate": true
+      }
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "file": false,
+        "createRelease": "github"
+      }
     }
   },
   "generators": {
