@@ -43,6 +43,6 @@ jobs:
 
       - name: Run publish
         run: |
-          npx run release publish
+          npx nx release publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
