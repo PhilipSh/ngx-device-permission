@@ -77,7 +77,7 @@ export class PermissionsComponent {
 | Reactive permission change observer                      | ✅ Done    |
 | Media stream request (camera, mic)                       | ✅ Done    |
 | Device enumeration (microphones, cameras)                | ✅ Done    |
-| Clipboard permission + interaction (navigator.clipboard) | ⏳ Planned |
+| Clipboard permission + interaction (navigator.clipboard) | ✅ Done    |
 | Geolocation permission and observer                      | ✅ Done    |
 | Notification permission API                              | ⏳ Planned |
 
