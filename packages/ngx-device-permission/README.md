@@ -78,7 +78,7 @@ export class PermissionsComponent {
 | Media stream request (camera, mic)                       | ✅ Done    |
 | Device enumeration (microphones, cameras)                | ✅ Done    |
 | Clipboard permission + interaction (navigator.clipboard) | ⏳ Planned |
-| Geolocation permission and observer                      | ⏳ Planned |
+| Geolocation permission and observer                      | ✅ Done    |
 | Notification permission API                              | ⏳ Planned |
 
 ## 🤝 Contributing
