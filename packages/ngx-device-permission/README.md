@@ -1,6 +1,6 @@
 # ngx-device-permission
 
-Angular library for managing browser permissions and accessing media devices (like microphone and camera) in a reactive and composable way using the [Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API) and [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices).
+Angular library for managing browser permissions and accessing media devices (like microphone and camera) in a reactive and composable way using the [Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API).
 
 ## 📦 Installation
 
