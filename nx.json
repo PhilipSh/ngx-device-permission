@@ -32,14 +32,12 @@
   },
   "release": {
     "projects": ["packages/*"],
-
     "version": {
-      "preVersionCommand": "npx nx run-many -t build",
       "conventionalCommits": true,
-      "manifestRootsToUpdate": ["packages/{projectName}"],
       "versionActionsOptions": {
         "skipLockFileUpdate": true
-      }
+      },
+      "manifestRootsToUpdate": ["packages/{projectName}"]
     },
     "changelog": {
       "workspaceChangelog": {
