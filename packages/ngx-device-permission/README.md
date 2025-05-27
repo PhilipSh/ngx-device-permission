@@ -19,13 +19,14 @@ npm install ngx-device-permission
 
 ## 📚 Usage
 
-### 1. DevicePermissionService
-
-Wrapper around the native navigator.permissions API.
+### 1. Media device service
 
 ```typescript
 import { Component, inject } from '@angular/core';
-import { DevicePermissionService } from 'ngx-device-permission';
+import {
+  DevicePermissionService,
+  MediaDeviceService,
+} from 'ngx-device-permission';
 
 @Component({
   selector: 'app-permissions',
@@ -65,6 +66,45 @@ export class PermissionsComponent {
       .subscribe((stream) => {
         this.stream = stream;
       });
+  }
+}
+```
+
+### 1. Geolocation service
+
+```typescript
+import { Component, inject } from '@angular/core';
+import {
+  DevicePermissionService,
+  MediaDeviceService,
+} from 'ngx-device-permission';
+
+@Component({
+  selector: 'app-permissions',
+  standalone: true,
+  template: `
+    <div>
+      <h3>Location Permission</h3>
+      <p>Status: {{ locationStatus$ | async }}</p>
+    </div>
+
+    <div>
+      <h3>Geolocation</h3>
+      <button (click)="requestLocation()">Request Location</button>
+    </div>
+  `,
+})
+export class PermissionsComponent {
+  private permissionService = inject(DevicePermissionService);
+  private geolocationService = inject(GeolocationService);
+
+  locationStatus$ =
+    this.permissionService.observePermissionChange('geolocation');
+
+  requestLocation() {
+    this.geolocationService.requestLocation().subscribe((position) => {
+      console.log(position);
+    });
   }
 }
 ```
